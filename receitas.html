@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Nossa Culinária - Receitas</title>
+		<link rel="stylesheet" href="./c.css" />
+		<link rel="icon" href="./files/icon.png"/>
+		<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+		crossorigin="anonymous">
+	</head>
+
+	<body class="HOM_REC_CAD" onload="preencheCatalogo()">
+
+		<nav class="navbar-xs navbar-expand navbar-dark bg-dark">
+			<a class="navbar-brand mx-sm-3" href="./home.html">Culinária</a>
+			<a class="navbar-brand mx-sm-3" href="./ordenando.html">Ordenando</a>
+			<a class="navbar-brand mx-sm-3" href="./usuarios.html">Usuarios</a>
+		</nav>
+
+		<header class="REC_cabecalho navbar cabecalho"><!--Cabeçalho-->
+			<div class="REC_cabecalho_div1" style="display:flex;">
+				<img class="REC_cabecalho_div1_imagem cabecalho_logo" src="./files/icon.png" width="50" height="50">
+				<h1 class="REC_cabecalho_div1_titulo margin0" >Nossa Culinária</h1>
+			</div>
+			<nav class="REC_cabecalho_div2 cabecalho_div2">
+				<div class="REC_cabecalho_menu">
+					<a class="REC_cabecalho_menu_a1 a_edit" href="./home.html">Home</a>
+					<a class="REC_cabecalho_menu_a2 a_edit" href="./receitas.html">Receitas</a>
+					<a class="REC_cabecalho_menu_a3 a_edit" href="./cadastro.html">Cadastro</a>
+				</div>
+			</nav>
+		</header>
+
+		<main class="REC_conteudo conteudo container-fluid"><!--Conteudo-->
+			<div id="pnlCatalogo" class="REC_conteudo_receitas" style="display:flex-wrap;"></div>
+		</main>
+
+		<footer class="REC_rodape rodape "><!--Rodapé-->
+			<div class="REC_rodape_lista1 rodape_lista1 rodape_lista_a margin0">
+				<a href="./home.html">Home</a>
+				<a href="./receitas.html">Receitas</a>
+				<a href="./cadastro.html">Cadastro</a>
+			</div>
+			<div class="REC_rodape_lista2 rodape_lista2">
+				<p class="REC_rodape_lista2_p1 margin0">Missão Prática Nível 1</p>
+				<p class="REC_rodape_lista2_p2 margin0">Desenvolvimento Fullstack - Estacio de Sá</p>
+				<p class="REC_rodape_lista2_p3 margin0">@Thi4goMoreir4 2023</p>
+			</div>
+			<div class="REC_rodape_lista3 rodape_lista3 rodape_lista_a margin0">
+				<a href="#">Facebook</a>
+				<a href="#">Twitter</a>
+				<a href="#">Youtube</a>
+			</div>
+		</footer>
+
+		<script>
+
+			const receitas = [
+				{
+				"titulo": "Arroz de Couve-Flor",
+				"imagem": "./files/receita_1.png",
+				"preparo": "Deixe a couve-flor picada. Adicione os ingredientes e refogue bem. Adicione sal, tampe a panela e deixe cozinhar.",
+				"ingredientes": ["Arroz","Couve-Flor","Cebola Média","Azeite"],
+				},
+				{
+				"titulo": "Bolo de Café",
+				"imagem": "./files/receita_2.png",
+				"preparo": "Bata o açucar, as gemas e o café. Adicione farinha e chocolate e mexa bem. Bata as claras e junte à mistura.",
+				"ingredientes": ["Farinha de Trigo","Açucar","Café Coado","Chocolate em Pó","Ovos"],
+				},
+				{
+				"titulo": "Coxinha de Brigadeiro",
+				"imagem": "./files/receita_3.png",
+				"preparo": "Junte o leite consensado, chocolate em pó e manteiga. Aqueça no fogo baixo. Envolva os Morangos e passe no granulado.",
+				"ingredientes": ["Leite Condensado","Chocolate em Pó","Manteiga","Morango","Chocolate Granulado"],
+				},
+			]
+
+			function getListaIngredientes (receita) {
+				let ingredientes = receita["ingredientes"];
+				let ul = document.createElement("ul");
+				ingredientes.map(function(item, i){
+					let li = document.createElement("li");
+					ul.appendChild(li);
+					li.innerText = item;
+				});
+				return ul;
+			}
+
+			function getCard (receita) {
+				let card = document.createElement("div");
+				let img = document.createElement("img");
+				let body = document.createElement("div");
+				let titulo = document.createElement("h3");
+				let ingredientes = getListaIngredientes (receita);
+				let hr = document.createElement("hr");
+				let text = document.createElement("div");
+				card.appendChild(img);
+				card.appendChild(body);
+				body.appendChild(titulo);
+				body.appendChild(ingredientes);
+				body.appendChild(hr);
+				body.appendChild(text);
+				card.className = "card";
+				img.className = "card-img-top";
+				body.className = "card-body";
+				titulo.className = "card-title";
+				text.className = "card-text";
+				titulo.innerText = receita["titulo"];
+				text.innerText = receita["preparo"];
+				img.setAttribute('src',receita["imagem"])
+				return card
+			}
+
+			function preencheCatalogo () {
+				let catalogo = document.getElementById("pnlCatalogo");
+				receitas.map(function(receita, i){
+					card = getCard(receita);
+					catalogo.appendChild(card);
+				});
+			}
+
+		</script>
+
+	</body>
+</html>
